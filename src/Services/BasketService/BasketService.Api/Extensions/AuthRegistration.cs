@@ -1,13 +1,11 @@
-﻿
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Ocelot.DependencyInjection;
-using Ocelot.Provider.Consul;
+using System;
 using System.Text;
 
-namespace Web.ApiGateway.Extensions
+namespace BasketService.Api.Extensions
 {
     public static class AuthRegistration
     {
@@ -37,6 +35,6 @@ namespace Web.ApiGateway.Extensions
                   });
 
       return services;
-    }
+        }
     }
 }

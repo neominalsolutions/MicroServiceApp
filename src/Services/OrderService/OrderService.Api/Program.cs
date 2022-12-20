@@ -30,7 +30,9 @@ builder.Services.AddApplicationRegistration(typeof(Program));
 //builder.Services.AddServiceDiscoveryRegistration(builder.Configuration);
 
 
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

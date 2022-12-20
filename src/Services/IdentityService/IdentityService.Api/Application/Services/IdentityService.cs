@@ -11,33 +11,41 @@ using System.Threading.Tasks;
 
 namespace IdentityServer.Api.Application.Services
 {
-    public class IdentityService : IIdentityService
+  public class IdentityService : IIdentityService
+  {
+    public Task<LoginResponseDto> Login(LoginRequestDto requestModel)
     {
-        public Task<LoginResponseDto> Login(LoginRequestDto requestModel)
-        {
-            // DB Process will be here. Check if user information is valid and get details
+      // DB Process will be here. Check if user information is valid and get details
 
-            var claims = new Claim[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, requestModel.UserName),
-                new Claim(ClaimTypes.Name, "Mert Alptekin"),
-            };
+      var key = Encoding.ASCII.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TokenBasedAuthenticationKeyShouldBeLong"));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expiry = DateTime.Now.AddHours(1);
+      var tokenHandler = new JwtSecurityTokenHandler();
+      var identity = new ClaimsIdentity(new Claim[]
+         {
+                    new Claim(ClaimTypes.Name, requestModel.UserName),
+                    new Claim(ClaimTypes.Role, "Admin")
+         });
 
-            var token = new JwtSecurityToken(claims: claims, expires: expiry, signingCredentials: creds, notBefore: DateTime.Now);
+      var descriptor = new SecurityTokenDescriptor
+      {
+        Subject = identity,
+        Expires = DateTime.UtcNow.AddHours(1),
+        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+      };
+      var token = tokenHandler.CreateToken(descriptor);
+      var accessToken = tokenHandler.WriteToken(token);
 
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(token);
+ 
+      LoginResponseDto response = new()
+      {
+        AccessToken = accessToken,
+        TokenType = "bearer"
+      };
 
-            LoginResponseDto response = new()
-            {
-                AccessToken = encodedJwt,
-                UserName = requestModel.UserName
-            };
 
-            return Task.FromResult(response);
-        }
+
+      return Task.FromResult(response);
+
     }
+  }
 }

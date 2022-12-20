@@ -97,7 +97,7 @@
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     },
     {
-      "DownstreamPathTemplate": "/api/baskets",
+      "DownstreamPathTemplate": "/api/baskets/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -105,8 +105,12 @@
           "Port": 5025
         }
       ],
-      "UpstreamPathTemplate": "/basket-service",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamPathTemplate": "/basket-service/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer", // Default Authentication Scheme
+        "AllowedScopes": []
+      }
     }
   ],
   "GlobalConfiguration": {
@@ -125,7 +129,7 @@
 
 // https://localhost:5010/api/baskets  -- GET
 
-// https://localhost:5010/basket-service
+// https://localhost:5010/basket-service/items
 
 
 // https://localhost:5010/api/orders/submitOrder  -- POST downstream
