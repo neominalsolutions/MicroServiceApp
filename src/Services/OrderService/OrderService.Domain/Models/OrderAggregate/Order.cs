@@ -6,7 +6,9 @@ namespace OrderService.Domain.Models
 {
   public class Order: BaseEntity
   {
+
     public string CustomerId { get; set; }
+
     public DateTime OrderDate { get; private set; }
     public string PaymentMethodId { get; set; }
     public string ShipAddress { get; set; }

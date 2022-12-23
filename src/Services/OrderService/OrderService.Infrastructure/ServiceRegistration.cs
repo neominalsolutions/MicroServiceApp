@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OrderService.Application.Repositories;
+using OrderService.Domain.Models.CustomerAggregate;
+using OrderService.Domain.OrderAggregate;
 using OrderService.Infrastructure.Contexts;
 using OrderService.Infrastructure.Repositories;
 using System;

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrderService.Application.Repositories;
 using OrderService.Domain.SeedWork;
 using OrderService.Infrastructure.Contexts;
 using System;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OrderService.Infrastructure.Repositories
 {
-  public class GenericRepository<T>: IGenericRepository<T> where T : BaseEntity
+  public class GenericRepository<T>: IRepository<T> where T : BaseEntity
   {
 
     private readonly OrderContext dbContext;

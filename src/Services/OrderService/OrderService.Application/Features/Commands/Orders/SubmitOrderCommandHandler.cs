@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using OrderService.Application.Repositories;
 using OrderService.Domain.AggregateModels.OrderAggregate;
 using OrderService.Domain.Models;
+using OrderService.Domain.OrderAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;

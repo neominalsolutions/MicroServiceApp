@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using OrderService.Application.Repositories;
 using OrderService.Domain.Events;
 using System;
 using System.Collections.Generic;

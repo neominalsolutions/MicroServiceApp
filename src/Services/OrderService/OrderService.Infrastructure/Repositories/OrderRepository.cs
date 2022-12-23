@@ -1,5 +1,6 @@
-﻿using OrderService.Application.Repositories;
+﻿
 using OrderService.Domain.Models;
+using OrderService.Domain.OrderAggregate;
 using OrderService.Infrastructure.Contexts;
 using System;
 using System.Collections.Generic;

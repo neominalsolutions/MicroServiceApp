@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using OrderService.Application.Repositories;
 using OrderService.Domain.Events;
+using OrderService.Domain.Models.CustomerAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +14,16 @@ namespace OrderService.Application.DomainEventHandlers
     {
         private readonly ICustomerRepository customerRepo;
 
-        public OrderSubmittedDomainEventHandler(ICustomerRepository buyerRepository)
+        public OrderSubmittedDomainEventHandler(ICustomerRepository customerRepo)
         {
-            this.customerRepo = buyerRepository;
+            this.customerRepo = customerRepo;
         }
 
         public async Task Handle(OrderSubmittedDomainEvent orderSubmittedEvent, CancellationToken cancellationToken)
         {
             var cardTypeId = (orderSubmittedEvent.CardTypeId != 0) ? orderSubmittedEvent.CardTypeId : 1;
 
-            var customer = await customerRepo.GetSingleAsync(i => i.CustomerName == orderSubmittedEvent.CustomerName, i => i.PaymentMethods);
+            var customer = await this.customerRepo.GetSingleAsync(i => i.CustomerName == orderSubmittedEvent.CustomerName, i => i.PaymentMethods);
 
             bool buyerOriginallyExisted = customer != null;
 
