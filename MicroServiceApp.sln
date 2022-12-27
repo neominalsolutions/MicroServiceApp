@@ -21,23 +21,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductService", "ProductSe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApiGateway", "WebApiGateway", "{856CE511-2203-46D7-AC7B-815D12C7DAF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService.Domain", "src\Services\OrderService\OrderService.Domain\OrderService.Domain.csproj", "{1358C8FD-EAE4-4507-B647-D94443842C40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Domain", "src\Services\OrderService\OrderService.Domain\OrderService.Domain.csproj", "{1358C8FD-EAE4-4507-B647-D94443842C40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService.Application", "src\Services\OrderService\OrderService.Application\OrderService.Application.csproj", "{2DBC4133-ABF6-40D1-B01E-F22F2B349DB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Application", "src\Services\OrderService\OrderService.Application\OrderService.Application.csproj", "{2DBC4133-ABF6-40D1-B01E-F22F2B349DB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService.Infrastructure", "src\Services\OrderService\OrderService.Infrastructure\OrderService.Infrastructure.csproj", "{A7E0221A-599C-4E4F-B4B9-0B4BAB80CB5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Infrastructure", "src\Services\OrderService\OrderService.Infrastructure\OrderService.Infrastructure.csproj", "{A7E0221A-599C-4E4F-B4B9-0B4BAB80CB5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService.Api", "src\Services\OrderService\OrderService.Api\OrderService.Api.csproj", "{C1DC7F98-45D1-429F-87D4-61574BB69A4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Api", "src\Services\OrderService\OrderService.Api\OrderService.Api.csproj", "{C1DC7F98-45D1-429F-87D4-61574BB69A4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketService.Api", "src\Services\BasketService\BasketService.Api\BasketService.Api.csproj", "{F9BAF4D3-60D9-4A4A-A8C5-A66DD5505F57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasketService.Api", "src\Services\BasketService\BasketService.Api\BasketService.Api.csproj", "{F9BAF4D3-60D9-4A4A-A8C5-A66DD5505F57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductService.Api", "src\Services\ProductService\ProductService.Api\ProductService.Api.csproj", "{76ADFEDB-C788-419A-B8AB-346667852DD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductService.Api", "src\Services\ProductService\ProductService.Api\ProductService.Api.csproj", "{76ADFEDB-C788-419A-B8AB-346667852DD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.ApiGateway", "src\ApiGateways\WebApiGateway\Web.ApiGateway\Web.ApiGateway.csproj", "{D60EA9C0-4002-46C1-AB32-863B1BA5717F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.ApiGateway", "src\ApiGateways\WebApiGateway\Web.ApiGateway\Web.ApiGateway.csproj", "{D60EA9C0-4002-46C1-AB32-863B1BA5717F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityService", "IdentityService", "{6A15D874-541B-4CB7-8206-C8EA82572AD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService.Api", "src\Services\IdentityService\IdentityService.Api\IdentityService.Api.csproj", "{8D03E43E-9500-48B1-B1D8-1F594252C34C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityService.Api", "src\Services\IdentityService\IdentityService.Api\IdentityService.Api.csproj", "{8D03E43E-9500-48B1-B1D8-1F594252C34C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{A059AA57-FD0F-4A68-BD63-9780E68884FF}"
 EndProject
@@ -47,13 +47,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{D7843054-69C0-4522-BBD9-D96E19E870C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.EFCore", "src\BuildingBlocks\Infrastructure\Infrastructure.EFCore\Infrastructure.EFCore.csproj", "{C7D042B2-13ED-4406-AE29-01FD69913C29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.EFCore", "src\BuildingBlocks\Infrastructure\Infrastructure.EFCore\Infrastructure.EFCore.csproj", "{C7D042B2-13ED-4406-AE29-01FD69913C29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Core", "src\BuildingBlocks\Domain\Domain.Core\Domain.Core.csproj", "{33FCDAF5-1E8D-4A1D-B5F7-85EC01C36909}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Core", "src\BuildingBlocks\Domain\Domain.Core\Domain.Core.csproj", "{33FCDAF5-1E8D-4A1D-B5F7-85EC01C36909}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Core", "src\BuildingBlocks\Application\Application.Core\Application.Core.csproj", "{0B8CDEE2-C24D-4DC2-9178-58F0C2ABEF0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Core", "src\BuildingBlocks\Application\Application.Core\Application.Core.csproj", "{0B8CDEE2-C24D-4DC2-9178-58F0C2ABEF0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Core", "src\BuildingBlocks\Api\Api.Core\Api.Core.csproj", "{0B3289EE-A8AA-48BE-AC99-6E0C15077FD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Core", "src\BuildingBlocks\Api\Api.Core\Api.Core.csproj", "{0B3289EE-A8AA-48BE-AC99-6E0C15077FD9}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7080ABDA-D73F-470E-AB38-AE64DD25CD32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +111,10 @@ Global
 		{0B3289EE-A8AA-48BE-AC99-6E0C15077FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B3289EE-A8AA-48BE-AC99-6E0C15077FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B3289EE-A8AA-48BE-AC99-6E0C15077FD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7080ABDA-D73F-470E-AB38-AE64DD25CD32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7080ABDA-D73F-470E-AB38-AE64DD25CD32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7080ABDA-D73F-470E-AB38-AE64DD25CD32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7080ABDA-D73F-470E-AB38-AE64DD25CD32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

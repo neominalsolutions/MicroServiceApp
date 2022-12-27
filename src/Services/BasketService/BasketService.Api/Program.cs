@@ -1,5 +1,6 @@
 using BasketService.Api.Extensions;
 using BasketService.Api.Extensions.Registration;
+using BasketService.Api.Infrastructure;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -80,7 +81,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors();
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 // middleware aktif edelim
 app.UseAuthentication();

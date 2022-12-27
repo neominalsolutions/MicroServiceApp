@@ -1,0 +1,42 @@
+version: '3.4'
+
+services:
+  identityservice1.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001
+      #- ConsulConfig__Address=http://consul:8500
+      #- ConsulConfig__ServiceAddress=http://identityservice:5001
+      #- ConsulConfig__ServiceName=IdentityService
+      #- ConsulConfig__ServiceId=IdentityService
+    ports:
+      - "5001:5001"
+    networks:
+      - backendservice_network
+
+  webapigateway1:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5011
+    ports:
+      - "5011:5011"
+    networks:
+      - apigateway_network
+      - backendservice_network
+
+  consul_service:
+    ports:
+      - 8500:8500
+      - 8600:8600/tcp
+      - 8600:8600/udp
+    networks:
+      - apigateway_network
+      - backendservice_network
+
+networks:
+  apigateway_network:
+    driver: bridge
+    external: true
+  backendservice_network:
+    driver: bridge
+    external: true

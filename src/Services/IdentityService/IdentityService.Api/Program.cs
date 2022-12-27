@@ -19,15 +19,17 @@ builder.Services.AddSwaggerGen();
 
 
 
-//string env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+string env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-//var config = new ConfigurationBuilder()
-//                    .SetBasePath(System.IO.Directory.GetCurrentDirectory())
-//                    .AddJsonFile($"Configurations/appsettings.json", optional: false)
-//                    .AddJsonFile($"Configurations/appsettings.{env}.json", optional: true)
-//                    .AddEnvironmentVariables()
-//                    .Build();
+var config = new ConfigurationBuilder()
+                    .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                    .AddJsonFile($"Configurations/appsettings.json", optional: false)
+                    .AddJsonFile($"Configurations/appsettings.{env}.json", optional: true)
+                    .AddEnvironmentVariables()
+                    .Build();
 
+
+builder.Services.ConfigureConsul(config);
 
 //builder.Services.AddCors(opt => {
 //  opt.AddDefaultPolicy(policy =>
@@ -59,10 +61,12 @@ if (app.Environment.IsDevelopment())
 
 //app.UseCors();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 //app.UseAuthentication();
 app.UseAuthorization();
+
+app.RegisterWithConsul(app.Lifetime,config);
 
 app.MapControllers();
 

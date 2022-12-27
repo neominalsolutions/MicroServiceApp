@@ -1,8 +1,10 @@
+using Consul;
 using Microsoft.OpenApi.Models;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
 using Web.ApiGateway.Extensions;
+using Web.ApiGateway.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,11 +58,23 @@ builder.Host.ConfigureAppConfiguration((host, config) =>
 
 
 
+
+
 // api gateway uygulamasýna jwt authentication dahil ettik.
 // ayný secret key ile çalýþýyorlar
 
 builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.AddOcelot().AddConsul();
+
+
+
+// consul client servisi tanýmladýk
+builder.Services.AddSingleton<IConsulClient>(consul => new ConsulClient(consulConfig =>
+{
+  consulConfig.Address = new Uri("http://localhost:8500");
+}));
+
+builder.Services.AddTransient<IConsulHttpClient, ConsulHttpClient>();
 
 
 
@@ -73,7 +87,7 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

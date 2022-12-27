@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProductService.Api.Dtos;
 
 namespace ProductService.Api.Controllers
 {
@@ -11,7 +12,24 @@ namespace ProductService.Api.Controllers
     [HttpGet("list")]
     public IActionResult GetProducts()
     {
-      return Ok("all-products");
+
+      var data = new List<ProductDto>
+      {
+        new ProductDto
+        {
+          ProductId = Guid.NewGuid().ToString(),
+          ProductName = "Product 1",
+          Price = 100
+        },
+        new ProductDto
+        {
+          ProductId = Guid.NewGuid().ToString(),
+          ProductName = "Product 2",
+          Price = 120
+        }
+      };
+
+      return Ok(data);
     }
 
   }
