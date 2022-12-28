@@ -4,7 +4,7 @@ using OrderService.Domain.SeedWork;
 
 namespace OrderService.Domain.Models
 {
-  public class Order: BaseEntity
+  public class Order: AggregateRoot
   {
 
     public string CustomerId { get; set; }

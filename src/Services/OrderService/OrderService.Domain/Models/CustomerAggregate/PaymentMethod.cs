@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OrderService.Domain.Models.CustomerAggregate
 {
-    public class PaymentMethod : BaseEntity
+    public class PaymentMethod : AggregateRoot
     {
         public string Alias { get; set; }
         public string CardNumber { get; set; }

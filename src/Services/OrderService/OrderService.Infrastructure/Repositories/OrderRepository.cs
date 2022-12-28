@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using OrderService.Domain.Models;
 using OrderService.Domain.OrderAggregate;
 using OrderService.Infrastructure.Contexts;
@@ -18,6 +19,11 @@ namespace OrderService.Infrastructure.Repositories
     public OrderRepository(OrderContext dbContext) : base(dbContext)
     {
       this.dbContext = dbContext;
+    }
+
+    public override async Task<Order> GetById(string id)
+    {
+      return await dbContext.Orders.Include(x => x.OrderItems).FirstOrDefaultAsync(x => x.Id == id);
     }
 
   }

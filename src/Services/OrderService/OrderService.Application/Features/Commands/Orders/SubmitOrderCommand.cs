@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OrderService.Application.Features.Commands.Orders
 {
-    public class SubmitOrderCommand : IRequest<bool>
+    public class SubmitOrderCommand : IRequest<string>
     {
 
        public List<BasketItemDto> BasketItems { get; set; } = new List<BasketItemDto>();

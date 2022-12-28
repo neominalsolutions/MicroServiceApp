@@ -3,6 +3,7 @@
 
 using OrderService.Application;
 using OrderService.Infrastructure;
+using OrderService.Infrastructure.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,26 @@ builder.Services.AddPersistenceRegistration(builder.Configuration);
 builder.Services.AddApplicationRegistration(typeof(Program));
 //builder.Services.AddServiceDiscoveryRegistration(builder.Configuration);
 
+
+builder.Services.AddCap(options =>
+{
+  options.UseEntityFramework<OrderContext>();
+  options.UseSqlServer(builder.Configuration.GetConnectionString("OrderDbConnectionString"));
+
+  options.UseDashboard(o => o.PathMatch = "/cap-dashboard");
+
+  options.UseRabbitMQ(options =>
+  {
+    options.ConnectionFactoryOptions = options =>
+    {
+      options.Ssl.Enabled = false;
+      options.HostName = "localhost";
+      options.UserName = "guest";
+      options.Password = "guest";
+      options.Port = 5672;
+    };
+  });
+});
 
 
 var app = builder.Build();

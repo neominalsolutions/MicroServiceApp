@@ -15,7 +15,7 @@ namespace OrderService.Infrastructure.Extensions
         public static async Task DispatchDomainEventsAsync(this IMediator mediator, OrderContext ctx)
         {
             var domainEntities = ctx.ChangeTracker
-                                    .Entries<BaseEntity>()
+                                    .Entries<AggregateRoot>()
                                     .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any());
 
             var domainEvents = domainEntities

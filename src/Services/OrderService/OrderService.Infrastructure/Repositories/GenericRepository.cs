@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OrderService.Infrastructure.Repositories
 {
-  public class GenericRepository<T>: IRepository<T> where T : BaseEntity
+  public class GenericRepository<T>: IRepository<T> where T : AggregateRoot
   {
 
     private readonly OrderContext dbContext;
@@ -60,7 +60,7 @@ namespace OrderService.Infrastructure.Repositories
       return await dbContext.Set<T>().ToListAsync();
     }
 
-    public virtual async Task<T> GetById(Guid id)
+    public virtual async Task<T> GetById(string id)
     {
       return await dbContext.Set<T>().FindAsync(id);
     }

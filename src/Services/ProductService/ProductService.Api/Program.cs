@@ -1,4 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using ProductService.Api.Extensions.Registration;
+using ProductService.Api.Infrastructure;
+using ProductService.Api.IntegrationEvents;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,16 +13,45 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-string env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-var config = new ConfigurationBuilder()
-                    .SetBasePath(System.IO.Directory.GetCurrentDirectory())
-                    .AddJsonFile($"Configurations/appsettings.json", optional: false)
-                    .AddJsonFile($"Configurations/appsettings.{env}.json", optional: true)
-                    .AddEnvironmentVariables()
-                    .Build();
 
-builder.Services.ConfigureConsul(config);
+
+
+
+
+
+
+
+builder.Services.ConfigureConsul(builder.Configuration);
+
+  builder.Services.AddDbContext<ProductContext>(opt =>
+  {
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("ProductDbConnectionString"));
+    opt.EnableSensitiveDataLogging();
+  });
+
+
+builder.Services.AddTransient<OrderCreatedIntegrationEventHandler>();
+
+builder.Services.AddCap(options =>
+{
+  options.UseEntityFramework<ProductContext>();
+  options.UseSqlServer(builder.Configuration.GetConnectionString("ProductDbConnectionString"));
+
+  options.UseRabbitMQ(options =>
+  {
+    options.ConnectionFactoryOptions = options =>
+    {
+      options.Ssl.Enabled = false;
+      options.HostName = "localhost";
+      options.UserName = "guest";
+      options.Password = "guest";
+      options.Port = 5672;
+    };
+  });
+});
+
+
 
 var app = builder.Build();
 
@@ -30,7 +62,7 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI();
 }
 
-app.RegisterWithConsul(app.Lifetime, config);
+app.RegisterWithConsul(app.Lifetime, builder.Configuration);
 
 //app.UseHttpsRedirection();
 

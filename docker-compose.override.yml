@@ -33,6 +33,16 @@ services:
       - apigateway_network
       - backendservice_network
 
+  rabbitmq_service:
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    networks:
+      - backendservice_network
+      - apigateway_network
+
 networks:
   apigateway_network:
     driver: bridge
@@ -40,3 +50,6 @@ networks:
   backendservice_network:
     driver: bridge
     external: true
+
+volumes:
+  rabbitmq:

@@ -17,3 +17,7 @@ services:
   consul_service:
     container_name: consul
     image: consul
+
+  rabbitmq_service:
+    container_name: rabbitmq
+    image: rabbitmq:3-management

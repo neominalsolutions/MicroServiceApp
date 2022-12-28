@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OrderService.Domain.SeedWork
 {
-    public abstract class BaseEntity
+    public abstract class AggregateRoot
     {
         public virtual string Id { get; protected set; }
         public DateTime CreateDate { get; set; }

@@ -4,7 +4,7 @@ using OrderService.Domain.SeedWork;
 
 namespace OrderService.Domain.Models.CustomerAggregate
 {
-  public class Customer: BaseEntity, IAggregateRoot
+  public class Customer: AggregateRoot, IAggregateRoot
   {
     public string CustomerName { get; set; }
 
