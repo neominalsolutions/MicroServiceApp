@@ -1,6 +1,7 @@
 using BasketService.Api.Extensions;
 using BasketService.Api.Extensions.Registration;
 using BasketService.Api.Infrastructure;
+using Consul;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -69,6 +70,13 @@ builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.AddSingleton(sp => sp.ConfigureRedis(builder.Configuration));
 builder.Services.ConfigureConsul(builder.Configuration);
 
+// consul client servisi tanýmladýk
+builder.Services.AddSingleton<IConsulClient>(consul => new ConsulClient(consulConfig =>
+{
+  consulConfig.Address = new Uri("http://localhost:8500");
+}));
+
+builder.Services.AddTransient<IConsulHttpClient, ConsulHttpClient>();
 
 
 var app = builder.Build();

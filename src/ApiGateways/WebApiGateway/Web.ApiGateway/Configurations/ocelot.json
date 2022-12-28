@@ -1,88 +1,93 @@
-{
-  "Routes": [
-    {
-      "UseServiceDiscovery": true,
-      "ServiceName": "IdentityService",
-
-      "DownstreamPathTemplate": "/api/auth",
-      "DownstreamScheme": "http",
-
-      "UpstreamPathTemplate": "/identity-service",
-      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
-      "UpstreamScheme": "http"
-    }
-  ],
-  "GlobalConfiguration": {
-    "BaseUrl": "http://webapigateway:5011",
-    //"BaseUrl": "http://localhost:5011",
-    "ServiceDiscoveryProvider": {
-      "Host": "consul",
-      //"Host": "http://localhost:5010",
-      "Port": 8500,
-      "Type": "Consul"
-    }
-  }
-}
-
 //{
 //  "Routes": [
 //    {
+//      "UseServiceDiscovery": true,
+//      "ServiceName": "IdentityService",
+
 //      "DownstreamPathTemplate": "/api/auth",
 //      "DownstreamScheme": "http",
-//      "DownstreamHostAndPorts": [
-//        {
-//          "Host": "localhost",
-//          "Port": 5005
-//        }
-//      ],
+
 //      "UpstreamPathTemplate": "/identity-service",
-//      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
-//    },
-//    {
-//      "DownstreamPathTemplate": "/api/orders/{url}",
-//      "DownstreamScheme": "http",
-//      "DownstreamHostAndPorts": [
-//        {
-//          "Host": "localhost",
-//          "Port": 5005
-//        }
-//      ],
-//      "UpstreamPathTemplate": "/order-service/{url}",
-//      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
-//    },
-//    {
-//      "DownstreamPathTemplate": "/api/products/{everything}",
-//      "DownstreamScheme": "http",
-//      "DownstreamHostAndPorts": [
-//        {
-//          "Host": "localhost",
-//          "Port": 5015
-//        }
-//      ],
-//      "UpstreamPathTemplate": "/product-service/{everything}",
-//      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
-//    },
-//    {
-//      "DownstreamPathTemplate": "/api/baskets/{everything}",
-//      "DownstreamScheme": "http",
-//      "DownstreamHostAndPorts": [
-//        {
-//          "Host": "localhost",
-//          "Port": 5025
-//        }
-//      ],
-//      "UpstreamPathTemplate": "/basket-service/{everything}",
-//      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-//      "AuthenticationOptions": {
-//        "AuthenticationProviderKey": "Bearer", // Default Authentication Scheme
-//        "AllowedScopes": []
-//      }
+//      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+//      "UpstreamScheme": "http"
 //    }
 //  ],
 //  "GlobalConfiguration": {
-//    "BaseUrl": "https://localhost:5010"
+//    //"BaseUrl": "http://webapigateway:5011",
+//    "BaseUrl": "http://localhost:5011",
+//    "ServiceDiscoveryProvider": {
+//      "Host": "consul",
+//      "Port": 8500,
+//      "Type": "Consul"
+//    }
 //  }
 //}
+
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "UpstreamPathTemplate": "/identity-service",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "10s",
+        "PeriodTimespan": 10,
+        "Limit": 3
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/orders/{url}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "UpstreamPathTemplate": "/order-service/{url}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/products/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5015 // 5015
+        }
+      ],
+      "UpstreamPathTemplate": "/product-service/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/baskets/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5025
+        }
+      ],
+      "UpstreamPathTemplate": "/basket-service/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer", // Default Authentication Scheme
+      //  "AllowedScopes": []
+      //}
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5011"
+  }
+}
 
 
 // https://localhost:5001/api/auth -- login identity service -- POST

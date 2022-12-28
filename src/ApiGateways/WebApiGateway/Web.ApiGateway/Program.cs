@@ -15,37 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 
-builder.Services.AddSwaggerGen(opt =>
-{
-
-  var securityScheme = new OpenApiSecurityScheme()
-  {
-    Description = "Web API Gateway. Example: \"Authorization: Bearer {token}\"",
-    Name = "Authorization",
-    In = ParameterLocation.Header,
-    Type = SecuritySchemeType.Http,
-    Scheme = "Bearer",
-    BearerFormat = "JWT" // Optional
-  };
-
-  var securityRequirement = new OpenApiSecurityRequirement
-{
-    {
-        new OpenApiSecurityScheme
-        {
-            Reference = new OpenApiReference
-            {
-                Type = ReferenceType.SecurityScheme,
-                Id = "bearerAuth"
-            }
-        },
-        new string[] {}
-    }
-};
-
-  opt.AddSecurityDefinition("bearerAuth", securityScheme);
-  opt.AddSecurityRequirement(securityRequirement);
-});
+builder.Services.AddSwaggerGen();
 
 
 builder.Host.ConfigureAppConfiguration((host, config) =>
@@ -68,13 +38,7 @@ builder.Services.AddOcelot().AddConsul();
 
 
 
-// consul client servisi tanýmladýk
-builder.Services.AddSingleton<IConsulClient>(consul => new ConsulClient(consulConfig =>
-{
-  consulConfig.Address = new Uri("http://localhost:8500");
-}));
 
-builder.Services.AddTransient<IConsulHttpClient, ConsulHttpClient>();
 
 
 
