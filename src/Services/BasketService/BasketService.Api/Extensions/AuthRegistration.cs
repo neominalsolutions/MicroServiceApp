@@ -13,23 +13,25 @@ namespace BasketService.Api.Extensions
         {
 
 
-      var key = Encoding.ASCII.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
+      var key = Encoding.ASCII.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"); // aynı key
 
+      // Basket Projesine bir authentication kimlik doğrulama yöntemi kazandırıyoruz.
       services.AddAuthentication(x =>
       {
         x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
       })
+        // JWT Authentication
                   .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
                   {
-                    x.RequireHttpsMetadata = false;
-                    x.SaveToken = true;
+                    x.RequireHttpsMetadata = false; // http çalışıyoruz
+                    x.SaveToken = true; // sistemin cacheinde sessionda bu token bilgisini sakla
                     x.TokenValidationParameters = new TokenValidationParameters
                     {
-                      ValidateIssuerSigningKey = true,
+                      ValidateIssuerSigningKey = true, // SignKey alogoritmasına göre validate et.
                       IssuerSigningKey = new SymmetricSecurityKey(key),
-                      ValidateIssuer = false,
-                      ValidateAudience = false
+                      ValidateIssuer = false, // Token Oluşturucu
+                      ValidateAudience = false // Token istek yapan arkadaşları token validation için önemsemedik
                     };
 
                   });

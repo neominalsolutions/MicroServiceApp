@@ -66,6 +66,7 @@ builder.Configuration.AddConfiguration(config);
 
 // JWT ile Token Based Auth yapalým
 
+// Kimlik doðurlama iþleminde buraki servisi kullanacaðým.
 builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.AddSingleton(sp => sp.ConfigureRedis(builder.Configuration));
 builder.Services.ConfigureConsul(builder.Configuration);
@@ -91,7 +92,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors();
 //app.UseHttpsRedirection();
 
-// middleware aktif edelim
+// eðer kimlik doðrulama süreci request pipline dahil edilecekse middleware aktif edelim
 app.UseAuthentication();
 app.UseAuthorization();
 

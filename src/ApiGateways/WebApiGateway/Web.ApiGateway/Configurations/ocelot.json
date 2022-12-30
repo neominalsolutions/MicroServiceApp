@@ -31,7 +31,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5005
+          "Port": 5001
         }
       ],
       "UpstreamPathTemplate": "/identity-service",
@@ -78,10 +78,10 @@
       ],
       "UpstreamPathTemplate": "/basket-service/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer", // Default Authentication Scheme
-      //  "AllowedScopes": []
-      //}
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer", // Default JWT Authentication Scheme
+        "AllowedScopes": []
+      }
     }
   ],
   "GlobalConfiguration": {

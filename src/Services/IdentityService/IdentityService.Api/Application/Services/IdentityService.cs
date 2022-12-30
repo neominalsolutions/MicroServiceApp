@@ -13,27 +13,45 @@ namespace IdentityServer.Api.Application.Services
 {
   public class IdentityService : IIdentityService
   {
+    private readonly IConfiguration configuration;
+
+
+    public IdentityService(IConfiguration configuration)
+    {
+      this.configuration = configuration;
+    }
     public Task<LoginResponseDto> Login(LoginRequestDto requestModel)
     {
       // DB Process will be here. Check if user information is valid and get details
 
       var key = Encoding.ASCII.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
 
-      var tokenHandler = new JwtSecurityTokenHandler();
+      var keyFromAppSettings = this.configuration.GetSection("JWTKey").Value;
+
+
+      // VERIFY SIGNATURE KEY Şifreleme Algoritması HS256, 
+
+      var tokenHandler = new JwtSecurityTokenHandler(); // token oluşturucu sınıf
+
+      // token içerisindeki payload bilgisi
       var identity = new ClaimsIdentity(new Claim[]
          {
                     new Claim(ClaimTypes.Name, requestModel.UserName),
                     new Claim(ClaimTypes.Role, "Admin")
          });
 
+      // claim kullanıcıya ait sistem tarafından taşınan özellik
+
+      // token içerisindeki kimlik bilgileri ve token algoritması ve expire time kullanılarak token oluşturmak için hazır hale getirir.
       var descriptor = new SecurityTokenDescriptor
       {
-        Subject = identity,
-        Expires = DateTime.UtcNow.AddHours(1),
+        Subject = identity, // Subject sistemdeki kullanıcı
+        Expires = DateTime.UtcNow.AddHours(1), // ne kadar sürelik bir tok
         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+        // 256 bitlik bir şifreleme algoritması kullan. Simetrik algoritmalar hem şifrelenir hemde şifre çözülür
       };
-      var token = tokenHandler.CreateToken(descriptor);
-      var accessToken = tokenHandler.WriteToken(token);
+      var token = tokenHandler.CreateToken(descriptor); // token nesnesi oluşur
+      var accessToken = tokenHandler.WriteToken(token); // token nesnesini yazıp access Token üret.
 
  
       LoginResponseDto response = new()
