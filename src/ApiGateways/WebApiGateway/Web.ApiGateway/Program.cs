@@ -35,6 +35,7 @@ builder.Host.ConfigureAppConfiguration((host, config) =>
 
 builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.AddOcelot().AddConsul();
+// ocelotan sonra consul diye bir service ekliyoruz.
 
 
 

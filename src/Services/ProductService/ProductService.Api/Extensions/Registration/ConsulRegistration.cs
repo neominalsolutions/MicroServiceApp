@@ -27,7 +27,7 @@ namespace ProductService.Api.Extensions.Registration
             return services;
         }
 
-        public static IApplicationBuilder RegisterWithConsul(this IApplicationBuilder app, IHostApplicationLifetime lifetime, IConfiguration configuration)
+        public static IApplicationBuilder UseConsol(this IApplicationBuilder app, IHostApplicationLifetime lifetime, IConfiguration configuration)
         {
             var consulClient = app.ApplicationServices.GetRequiredService<IConsulClient>();
 

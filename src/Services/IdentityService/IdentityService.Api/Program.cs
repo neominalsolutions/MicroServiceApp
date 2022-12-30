@@ -18,6 +18,7 @@ builder.Services.AddSwaggerGen();
 
 string env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
+// config dosyasýndaki bilgilere göre
 var config = new ConfigurationBuilder()
                     .SetBasePath(System.IO.Directory.GetCurrentDirectory())
                     .AddJsonFile($"Configurations/appsettings.json", optional: false)
@@ -25,8 +26,8 @@ var config = new ConfigurationBuilder()
                     .AddEnvironmentVariables()
                     .Build();
 
-
-builder.Services.ConfigureConsul(config);
+// service olarak tanýt
+builder.Services.AddConsul(config);
 
 
 
@@ -44,7 +45,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
-app.RegisterWithConsul(app.Lifetime,config);
+// yani þuanki uygulamamý uygulama ayaða kalktýðýnda register et diyoruz
+app.UseConsul(app.Lifetime,config);
 
 app.MapControllers();
 

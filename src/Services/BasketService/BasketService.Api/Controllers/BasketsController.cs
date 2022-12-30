@@ -11,7 +11,7 @@ namespace BasketService.Api.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  [Authorize]
+  //[Authorize]
   // Default JWT Scheme Bearer ismindedir.
 
   public class BasketsController : ControllerBase
@@ -31,12 +31,12 @@ namespace BasketService.Api.Controllers
 
       //var auth = await HttpContext.AuthenticateAsync();
       // access token bilgisini 
-      var accessToken = await HttpContext.GetTokenAsync("access_token");
+      //var accessToken = await HttpContext.GetTokenAsync("access_token");
       // direkt olarak acesss Token bilgisi erişip token Decode işlemi yapabiliriz.
 
-      var handler = new JwtSecurityTokenHandler();
+      //var handler = new JwtSecurityTokenHandler();
 
-      var jsonToken = handler.ReadToken(accessToken);
+      //var jsonToken = handler.ReadToken(accessToken);
 
       //if (auth.Succeeded)
       //{
@@ -44,7 +44,7 @@ namespace BasketService.Api.Controllers
       //}
 
       // Product Service Product Listesini alalım
-      var data = await client.GetAsync<List<ProductDto>>("ProductService", "api/products/list");
+      var data = await client.GetAsync<List<ProductDto>>(serviceName:"ProductService", endpoint: "api/products/list");
 
       return Ok(data);
     }

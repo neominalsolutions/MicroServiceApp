@@ -11,8 +11,8 @@ namespace BasketService.Api.Infrastructure
  
   public interface IConsulHttpClient
   {
-    Task<TResponse> GetAsync<TResponse>(string serviceName, string requestUri);
-    Task<TResponse> PostAsync<TResponse, TParam>(string serviceName, string requestUri, TParam param);
+    Task<TResponse> GetAsync<TResponse>(string serviceName, string endpoint);
+    Task<TResponse> PostAsync<TResponse, TParam>(string serviceName, string endpoint, TParam param);
   }
 
   // Kuzey-Güney Microservicleri birbirlerine istek attıklarında bu service vasıtası ile haberleşecekler.
@@ -34,9 +34,12 @@ namespace BasketService.Api.Infrastructure
 
       // Polly kütüphanesi Retry Pattern
 
+      // retry policy ile istek 3 kez denesin 3 kez sonunda bir cevap alınmaz ise service erişilemediğinin hatası verilsin
       await Polly.Policy.Handle<Exception>().RetryAsync(3, (e, r) =>
        {}).ExecuteAsync(async () =>
        {
+         // burada 3 kez denecek olan kod yazıldı.
+         // servis kesintisi minimum seviyede etkilensin haberleşme kesintiye uğramasın diye yaptık
 
          using HttpClient client = new HttpClient();
          var response = await client.GetAsync(uri);
@@ -81,9 +84,12 @@ namespace BasketService.Api.Infrastructure
     {
       //Get all services registered on Consul
       var allRegisteredServices = await _consulclient.Agent.Services();
+      // consule kayıtlı tüm servisleri buluruz.
 
       //Get all instance of the service went to send a request to
+      // serviceName ProductService olanı git comsul üzerinden oku.
       var registeredServices = allRegisteredServices.Response?.Where(s => s.Value.Service.Equals(serviceName, StringComparison.OrdinalIgnoreCase)).Select(x => x.Value).ToList();
+      // sistemde aynı serviceName isminde ama farklı serviceId farklı instance yer alabilir. o yüzdne hangi service'den sonuç döneceğine karar verecek bir mekanizma olmalı.
 
       //Get a random instance of the service
       var service = GetRandomInstance(registeredServices, serviceName);
@@ -110,6 +116,10 @@ namespace BasketService.Api.Infrastructure
 
       AgentService servToUse = null;
 
+      // ProductService 1323:5001
+      // ProductService 324324:5003
+      // ProductService 7567657:5004
+      // 2
       servToUse = services[_random.Next(0, services.Count)];
 
       return servToUse;

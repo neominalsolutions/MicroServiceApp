@@ -1,93 +1,99 @@
-//{
-//  "Routes": [
-//    {
-//      "UseServiceDiscovery": true,
-//      "ServiceName": "IdentityService",
-
-//      "DownstreamPathTemplate": "/api/auth",
-//      "DownstreamScheme": "http",
-
-//      "UpstreamPathTemplate": "/identity-service",
-//      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
-//      "UpstreamScheme": "http"
-//    }
-//  ],
-//  "GlobalConfiguration": {
-//    //"BaseUrl": "http://webapigateway:5011",
-//    "BaseUrl": "http://localhost:5011",
-//    "ServiceDiscoveryProvider": {
-//      "Host": "consul",
-//      "Port": 8500,
-//      "Type": "Consul"
-//    }
-//  }
-//}
-
 {
   "Routes": [
     {
+      "UseServiceDiscovery": true, // service discovery yöntemini kullanacaðýmý belirttim
+      "ServiceName": "IdentityService1", // service ismi ile artýk eriþim saðlayacaðýmýzý söyledik. (Port veya Host bilgisi yazmadýk)
       "DownstreamPathTemplate": "/api/auth",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5001
-        }
-      ],
       "UpstreamPathTemplate": "/identity-service",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "10s",
-        "PeriodTimespan": 10,
-        "Limit": 3
-      }
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "UpstreamScheme": "http"
     },
-    {
-      "DownstreamPathTemplate": "/api/orders/{url}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5005
-        }
-      ],
-      "UpstreamPathTemplate": "/order-service/{url}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/products/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5015 // 5015
-        }
-      ],
-      "UpstreamPathTemplate": "/product-service/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/baskets/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5025
-        }
-      ],
-      "UpstreamPathTemplate": "/basket-service/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer", // Default JWT Authentication Scheme
-        "AllowedScopes": []
-      }
-    }
+    //{
+    //  "UseServiceDiscovery": true, // service discovery yöntemini kullanacaðýmý belirttim
+    //  "ServiceName": "IdentityService2", // service ismi ile artýk eriþim saðlayacaðýmýzý söyledik. (Port veya Host bilgisi yazmadýk)
+    //  "DownstreamPathTemplate": "/api/auth",
+    //  "DownstreamScheme": "http",
+    //  "UpstreamPathTemplate": "/identity-service",
+    //  "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+    //  "UpstreamScheme": "http"
+    //}
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5011"
+    "BaseUrl": "http://localhost:5011",
+    "ServiceDiscoveryProvider": { // 8500 consul default http port 8600 tcp:udp port
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    }
   }
 }
+
+//{
+//  "Routes": [
+//    {
+//      "DownstreamPathTemplate": "/api/auth",
+//      "DownstreamScheme": "http",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "localhost",
+//          "Port": 5001
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/identity-service",
+//      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+//      "RateLimitOptions": {
+//        "EnableRateLimiting": true,
+//        "Period": "10s",
+//        "PeriodTimespan": 10,
+//        "Limit": 3
+//      }
+//    },
+//    {
+//      "DownstreamPathTemplate": "/api/orders/{url}",
+//      "DownstreamScheme": "http",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "localhost",
+//          "Port": 5005
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/order-service/{url}",
+//      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+//    },
+//    {
+//      "DownstreamPathTemplate": "/api/products/{everything}",
+//      "DownstreamScheme": "http",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "localhost",
+//          "Port": 5015 // 5015
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/product-service/{everything}",
+//      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+//    },
+//    {
+//      "DownstreamPathTemplate": "/api/baskets/{everything}",
+//      "DownstreamScheme": "http",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "localhost",
+//          "Port": 5025
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/basket-service/{everything}",
+//      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+//      "AuthenticationOptions": {
+//        "AuthenticationProviderKey": "Bearer", // Default JWT Authentication Scheme
+//        "AllowedScopes": []
+//      }
+//    }
+//  ],
+//  "GlobalConfiguration": {
+//    "BaseUrl": "https://localhost:5011"
+//  }
+//}
 
 
 // https://localhost:5001/api/auth -- login identity service -- POST
