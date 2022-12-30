@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8988AE70-23E5-4477-9232-C70F2CC58581}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Isnet_Resimler.docx = ..\..\Isnet_Resimler.docx
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C01CFC28-AC88-4640-A1FF-B7BCEB4B84E3}"
 EndProject
