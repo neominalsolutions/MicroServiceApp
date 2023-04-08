@@ -34,6 +34,8 @@ namespace OrderService.Api.Controllers
     public async Task<IActionResult> SubmitOrder([FromBody] SubmitOrderCommand command)
     {
       var orderId = await mediator.Send(command);
+
+      // 
       var order = await this.orderRepository.GetById(orderId);
 
       var PurchasedOrderItems = order.OrderItems.Select(a => new PurchasedOrderItem

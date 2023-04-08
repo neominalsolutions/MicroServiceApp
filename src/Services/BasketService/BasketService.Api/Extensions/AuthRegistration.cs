@@ -12,7 +12,7 @@ namespace BasketService.Api.Extensions
         public static IServiceCollection ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
         {
 
-
+      // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
       var key = Encoding.ASCII.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"); // aynı key
 
       // Basket Projesine bir authentication kimlik doğrulama yöntemi kazandırıyoruz.
