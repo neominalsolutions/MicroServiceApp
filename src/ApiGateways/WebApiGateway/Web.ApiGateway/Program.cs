@@ -1,5 +1,9 @@
+using CacheManager.Core;
 using Consul;
 using Microsoft.OpenApi.Models;
+using MMLib.Ocelot.Provider.AppConfiguration;
+using MMLib.SwaggerForOcelot.DependencyInjection;
+using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
@@ -12,21 +16,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
 
 
-builder.Services.AddSwaggerGen();
+//builder.Host.ConfigureAppConfiguration((host, config) =>
+//{
+//  config.SetBasePath(host.HostingEnvironment.ContentRootPath)
+//                        .AddJsonFile("Configurations/ocelot.json", optional: false, reloadOnChange: true)
+//                        .AddEnvironmentVariables();
+//});
 
 
-builder.Host.ConfigureAppConfiguration((host, config) =>
+
+
+builder.Configuration.AddOcelotWithSwaggerSupport(options =>
 {
-  config.SetBasePath(host.HostingEnvironment.ContentRootPath)
-                        .AddJsonFile("Configurations/ocelot.json", optional: false, reloadOnChange: true)
-                        .AddEnvironmentVariables();
+  options.Folder = "Configurations";
 });
-
-
-
 
 
 
@@ -34,9 +39,20 @@ builder.Host.ConfigureAppConfiguration((host, config) =>
 // ayný secret key ile çalýþýyorlar
 
 builder.Services.ConfigureAuth(builder.Configuration);
-builder.Services.AddOcelot().AddConsul();
+builder.Services
+  .AddOcelot(builder.Configuration)
+  .AddCacheManager(x =>
+{
+  x.WithRedisConfiguration("redis",
+          config =>
+          {
+            config.WithEndpoint("localhost", 6379);
+          })
+  .WithJsonSerializer()
+  .WithRedisCacheHandle("redis");
+}).AddConsul();
+builder.Services.AddSwaggerForOcelot(builder.Configuration);
 // ocelotan sonra consul diye bir service ekliyoruz.
-
 
 
 
@@ -45,21 +61,26 @@ builder.Services.AddOcelot().AddConsul();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
   app.UseSwagger();
-  app.UseSwaggerUI();
-}
 
-//app.UseHttpsRedirection();
+}
 
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseSwaggerForOcelotUI(opt =>
+  {
+    opt.PathToSwaggerGenerator = "/swagger/docs";
+  }).UseOcelot().Wait();
+
+//app.UseHttpsRedirection();
+
 app.MapControllers();
 
-// ocelot middleware
-app.UseOcelot().Wait();
+//// ocelot middleware
+//app.UseOcelot().Wait();
 
 app.Run();

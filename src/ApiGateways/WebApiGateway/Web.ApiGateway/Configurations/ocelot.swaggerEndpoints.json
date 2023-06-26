@@ -1,0 +1,31 @@
+{
+  "SwaggerEndPoints": [
+    {
+      "Key": "identity",
+      "Config": [
+        {
+          "Name": "Identity API",
+          "Version": "v1",
+          "Service": {
+            "Name": "IdentityService",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
+    },
+    {
+      "Key": "product",
+      "Config": [
+        {
+          "Name": "Product Api",
+          "Version": "v1",
+          "Service": {
+            "Name": "ProductService",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
+    }
+
+  ]
+}

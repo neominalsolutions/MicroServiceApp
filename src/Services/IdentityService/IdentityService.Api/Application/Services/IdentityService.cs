@@ -26,9 +26,6 @@ namespace IdentityServer.Api.Application.Services
 
       var key = Encoding.ASCII.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
 
-      var keyFromAppSettings = this.configuration.GetSection("JWTKey").Value;
-
-
       // VERIFY SIGNATURE KEY Şifreleme Algoritması HS256, 
 
       var tokenHandler = new JwtSecurityTokenHandler(); // token oluşturucu sınıf
@@ -36,8 +33,10 @@ namespace IdentityServer.Api.Application.Services
       // token içerisindeki payload bilgisi
       var identity = new ClaimsIdentity(new Claim[]
          {
-                    new Claim(ClaimTypes.Name, requestModel.UserName),
-                    new Claim(ClaimTypes.Role, "Admin")
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Name, requestModel.UserName),
+                    new Claim("Roles",requestModel.Roles),
+                    new Claim("scope", string.Join(" ", requestModel.Scopes))
          });
 
       // claim kullanıcıya ait sistem tarafından taşınan özellik

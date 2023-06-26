@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  identityservice1.api:
+  identityservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5001
@@ -14,7 +14,7 @@ services:
     networks:
       - backendservice_network
 
-  webapigateway1:
+  webapigateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5011

@@ -14,7 +14,7 @@ namespace OrderService.Api.Extensions.Registration.Consul
 {
     public static class ConsulRegistration
     {
-        public static IServiceCollection AddServiceDiscoveryRegistration(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureConsul(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
             {
@@ -25,7 +25,7 @@ namespace OrderService.Api.Extensions.Registration.Consul
             return services;
         }
 
-        public static IApplicationBuilder RegisterWithConsul(this IApplicationBuilder app, IHostApplicationLifetime lifetime, IConfiguration configuration)
+        public static IApplicationBuilder UseConsul(this IApplicationBuilder app, IHostApplicationLifetime lifetime, IConfiguration configuration)
         {
             var consulClient = app.ApplicationServices.GetRequiredService<IConsulClient>();
 

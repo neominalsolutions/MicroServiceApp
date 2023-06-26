@@ -1,0 +1,24 @@
+{
+  "Routes": [
+
+    {
+      "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim
+      "ServiceName": "IdentityService", // service ismi ile art�k eri�im sa�layaca��m�z� s�yledik. (Port veya Host bilgisi yazmad�k)
+      "DownstreamPathTemplate": "/api/auth",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/identity",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "UpstreamScheme": "http",
+      "SwaggerKey": "identity",
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true, // hız sınırlaması etkileştirme
+        "Period": "1m", // 1 dakika limit üstüne çıkarsak periodtimespan değerinin sürenin dolmasını bekleriz
+        "PeriodTimespan": 60, // belirli sayıda saniye sonra tekrar denebilir, istek sınırını aşınca 1 dakika bekle
+        "Limit": 5 // belirli bir süre içerisinde yapabileceği maksimum istek sayısı
+        // sınır aşılınca 429 hatası alırız
+      }
+    }
+    
+  ]
+}

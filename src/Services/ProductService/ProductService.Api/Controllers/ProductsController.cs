@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProductService.Api.Dtos;
 
@@ -9,9 +11,9 @@ namespace ProductService.Api.Controllers
   public class ProductsController : ControllerBase
   {
 
-    [HttpGet("list")]
+    [HttpGet]
     public IActionResult GetProducts()
-    {
+   {
 
       var data = new List<ProductDto>
       {
@@ -31,6 +33,8 @@ namespace ProductService.Api.Controllers
 
       return Ok(data);
     }
+
+ 
 
   }
 }

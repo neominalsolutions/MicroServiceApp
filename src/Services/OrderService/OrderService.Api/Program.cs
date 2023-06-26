@@ -1,6 +1,7 @@
 
 
 
+using OrderService.Api.Extensions.Registration.Consul;
 using OrderService.Application;
 using OrderService.Infrastructure;
 using OrderService.Infrastructure.Contexts;
@@ -28,7 +29,7 @@ builder.Configuration.AddConfiguration(config);
 
 builder.Services.AddPersistenceRegistration(builder.Configuration);
 builder.Services.AddApplicationRegistration(typeof(Program));
-//builder.Services.AddServiceDiscoveryRegistration(builder.Configuration);
+builder.Services.ConfigureConsul(builder.Configuration);
 
 
 builder.Services.AddCap(options =>
@@ -61,6 +62,8 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+
+app.UseConsul(app.Lifetime, builder.Configuration);
 
 //app.UseHttpsRedirection();
 

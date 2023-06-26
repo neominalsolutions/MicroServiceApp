@@ -69,7 +69,7 @@ builder.Configuration.AddConfiguration(config);
 // Kimlik doðurlama iþleminde buraki servisi kullanacaðým.
 builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.AddSingleton(sp => sp.ConfigureRedis(builder.Configuration));
-builder.Services.ConfigureConsul(builder.Configuration);
+builder.Services.AddConsul(builder.Configuration);
 
 // consul client servisi tanýmladýk
 builder.Services.AddSingleton<IConsulClient>(consul => new ConsulClient(consulConfig =>
@@ -91,6 +91,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors();
 //app.UseHttpsRedirection();
+
+app.UseConsul(app.Lifetime, builder.Configuration);
 
 // eðer kimlik doðrulama süreci request pipline dahil edilecekse middleware aktif edelim
 app.UseAuthentication();

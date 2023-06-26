@@ -1,0 +1,16 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5011",
+    "ServiceDiscoveryProvider": { // 8500 consul default http port 8600 tcp:udp port
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    },
+    "RateLimitOptions": {
+      "DisableRateLimitHeaders": false, // X-Rate ve Retr-After başlıklarını devre dışı bırakıp bırakmayacağını belirtir.
+      "QuotaExceededMessage": "API çağrıları kotası aşıldı!", // değer aşılınca dönecek olan cevap
+      "HttpStatusCode": 429, // değer aşınca dönecek olan status code
+      "ClientIdHeader": "x-client" // istemcileri tanımak amaçlı kullanılır default değer clientId 
+    }
+  }
+}

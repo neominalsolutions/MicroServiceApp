@@ -14,7 +14,7 @@ namespace BasketService.Api.Extensions
 {
     public static class ConsulRegistration
     {
-        public static IServiceCollection ConfigureConsul(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddConsul(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
             {
@@ -25,7 +25,7 @@ namespace BasketService.Api.Extensions
             return services;
         }
 
-        public static IApplicationBuilder RegisterWithConsul(this IApplicationBuilder app, IHostApplicationLifetime lifetime, IConfiguration configuration)
+        public static IApplicationBuilder UseConsul(this IApplicationBuilder app, IHostApplicationLifetime lifetime, IConfiguration configuration)
         {
             var consulClient = app.ApplicationServices.GetRequiredService<IConsulClient>();
 

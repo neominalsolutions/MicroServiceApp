@@ -1,13 +1,13 @@
 version: '3.4'
 
 services:
-  identityservice1.api:
+  identityservice:
     container_name: identity_service
     image: ${DOCKER_REGISTRY-}identityserviceapi
     build:
       context: .
       dockerfile: src/Services/IdentityService/IdentityService.Api/Dockerfile
-  webapigateway1:
+  webapigateway:
     container_name: webapigateway
     image: ${DOCKER_REGISTRY-}webapigateway
     build:

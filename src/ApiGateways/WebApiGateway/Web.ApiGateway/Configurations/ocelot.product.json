@@ -1,0 +1,92 @@
+{
+  "Routes": [
+    {
+      "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim
+      "ServiceName": "ProductService", // service ismi ile art�k eri�im sa�layaca��m�z� s�yledik. (Port veya Host bilgisi yazmad�k)
+      "DownstreamPathTemplate": "/api/products",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/products/",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "UpstreamScheme": "http",
+      "SwaggerKey": "product",
+      "RouteIsCaseSensitive": false,
+      "FileCacheOptions": {
+        "TtlSeconds": 30, // 30 sn boyunca
+        "Region": "cache-products" // redis üzerinde hangi keyde saklanacağı bilgisi
+      },
+      "Key": "products" // aggregate key
+    },
+    {
+      "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim
+      "ServiceName": "ProductService", // service ismi ile art�k eri�im sa�layaca��m�z� s�yledik. (Port veya Host bilgisi yazmad�k)
+      "DownstreamPathTemplate": "/api/products/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/products/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "UpstreamScheme": "http",
+      "SwaggerKey": "product"
+    },
+    {
+      "UseServiceDiscovery": true, // service discovery yöntemini kullanacağımızı belirttik
+      "ServiceName": "ProductService", // service ismi ile artık erişim sağlayacağımızı söyledik. (Port veya Host bilgisi yazmadık Service Discoveryden gelecek)
+      "DownstreamPathTemplate": "/api/suppliers",
+      "DownstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "user.read" ] // user.read scope varsa get endpointte sadece claim olarak user.read scope varsa yetkili olur.
+      },
+      "RouteClaimsRequirement": {
+        "Roles": "Admin" // hemde admin yetkisine sahip olmalıyım.
+      },
+      "UpstreamPathTemplate": "/suppliers",
+      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamScheme": "http",
+      "SwaggerKey": "product"
+    },
+    {
+      "UseServiceDiscovery": true, // service discovery yöntemini kullanacağımızı belirttik
+      "ServiceName": "ProductService", // service ismi ile artık erişim sağlayacağımızı söyledik. (Port veya Host bilgisi yazmadık Service Discoveryden gelecek)
+      "DownstreamPathTemplate": "/api/categories",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/categories",
+      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamScheme": "http",
+      "SwaggerKey": "product",
+      "Key": "categories" // aggregate key
+
+    }
+  ],
+  "Aggregates": [
+    {
+      "RouteKeys": [ "products", "categories" ],
+      "UpstreamPathTemplate": "/categories-and-products"
+    }
+  ]
+}
+
+
+//"AuthenticationOptions": {
+//        "AuthenticationProviderKey": "Bearer",
+//        "AllowedScopes": []
+//      }
+
+
+//{
+//  "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim
+//  "ServiceName": "ProductService", // service ismi ile art�k eri�im sa�layaca��m�z� s�yledik. (Port veya Host bilgisi yazmad�k)
+//  "DownstreamPathTemplate": "/api/suppliers/{everything}",
+//  "DownstreamScheme": "http",
+//  "AuthenticationOptions": {
+//    "AuthenticationProviderKey": "Bearer",
+//    "AllowedScopes": []
+//  },
+//  "RouteClaimsRequirement": {
+//    "Role": "Admin"
+//  },
+//  "UpstreamPathTemplate": "/suppliers/{everything}",
+//  "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+//  "UpstreamScheme": "http",
+//  "SwaggerKey": "product"
+
+
+//}
