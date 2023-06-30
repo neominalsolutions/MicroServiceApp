@@ -43,6 +43,8 @@ if (app.Environment.IsDevelopment())
 }
 
 
+app.UseHttpsRedirection();
+
 app.UseAuthorization();
 
 // yani þuanki uygulamamý uygulama ayaða kalktýðýnda register et diyoruz

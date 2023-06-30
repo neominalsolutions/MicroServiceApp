@@ -25,7 +25,7 @@ namespace BasketService.Api.Controllers
     }
 
 
-    [HttpGet("items")]
+    [HttpGet]
     public async Task<IActionResult> GetBasket()
     {
 
@@ -44,7 +44,7 @@ namespace BasketService.Api.Controllers
       //}
 
       // Product Service Product Listesini alalım
-      var data = await client.GetAsync<List<ProductDto>>(serviceName:"ProductService", endpoint: "api/products/list");
+      var data = await client.GetAsync<List<ProductDto>>(serviceName:"ProductService", endpoint: "api/products");
 
       return Ok(data);
     }

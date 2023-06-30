@@ -1,0 +1,26 @@
+{
+  "Routes": [
+    {
+      "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim
+      "ServiceName": "BasketService", // service ismi ile art�k eri�im sa�layaca��m�z� s�yledik. (Port veya Host bilgisi yazmad�k)
+      "DownstreamPathTemplate": "/api/baskets",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/baskets/",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "UpstreamScheme": "http",
+      "SwaggerKey": "basket"
+    },
+    {
+      "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim
+      "ServiceName": "BasketService", // service ismi ile art�k eri�im sa�layaca��m�z� s�yledik. (Port veya Host bilgisi yazmad�k)
+      "DownstreamPathTemplate": "/api/baskets/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/baskets/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "UpstreamScheme": "http",
+      "SwaggerKey": "basket"
+    }
+  ]
+}
+
+

@@ -63,9 +63,11 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
+
 app.UseConsul(app.Lifetime, builder.Configuration);
 
-//app.UseHttpsRedirection();
+
 
 app.UseAuthorization();
 

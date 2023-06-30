@@ -31,10 +31,6 @@ namespace OrderService.Domain.Models.CustomerAggregate
             SecurityNumber = !string.IsNullOrWhiteSpace(securityNumber) ? securityNumber : throw new OrderingDomainException(nameof(securityNumber));
             CardHolderName = !string.IsNullOrWhiteSpace(cardHolderName) ? cardHolderName : throw new OrderingDomainException(nameof(cardHolderName));
 
-            if (expiration < DateTime.UtcNow)
-            {
-                throw new OrderingDomainException(nameof(expiration));
-            }
 
             Alias = alias;
             Expiration = expiration;

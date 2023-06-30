@@ -89,10 +89,15 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI();
 }
 
+
+
 app.UseCors();
-//app.UseHttpsRedirection();
+
 
 app.UseConsul(app.Lifetime, builder.Configuration);
+
+
+//app.UseHttpsRedirection();
 
 // eðer kimlik doðrulama süreci request pipline dahil edilecekse middleware aktif edelim
 app.UseAuthentication();

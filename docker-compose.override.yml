@@ -4,11 +4,11 @@ services:
   identityservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5001
-      #- ConsulConfig__Address=http://consul:8500
-      #- ConsulConfig__ServiceAddress=http://identityservice:5001
-      #- ConsulConfig__ServiceName=IdentityService
-      #- ConsulConfig__ServiceId=IdentityService
+      - ASPNETCORE_URLS=https://+:5001
+      - ConsulConfig__Address=http://consul:8500
+      - ConsulConfig__ServiceAddress=http://identityservice:5001
+      - ConsulConfig__ServiceName=IdentityService
+      - ConsulConfig__ServiceId=IdentityService
     ports:
       - "5001:5001"
     networks:
@@ -17,7 +17,7 @@ services:
   webapigateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:5011
+      - ASPNETCORE_URLS=https://+:5011
     ports:
       - "5011:5011"
     networks:

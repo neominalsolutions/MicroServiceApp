@@ -25,6 +25,32 @@
           }
         }
       ]
+    },
+    {
+      "Key": "basket",
+      "Config": [
+        {
+          "Name": "Basket Api",
+          "Version": "v1",
+          "Service": {
+            "Name": "BasketService",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
+    },
+    {
+      "Key": "order",
+      "Config": [
+        {
+          "Name": "Order Api",
+          "Version": "v1",
+          "Service": {
+            "Name": "OrderService",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
     }
 
   ]

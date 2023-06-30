@@ -1,0 +1,31 @@
+{
+  "Routes": [
+    {
+      "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim
+      "ServiceName": "OrderService", // service ismi ile art�k eri�im sa�layaca��m�z� s�yledik. (Port veya Host bilgisi yazmad�k)
+      "DownstreamPathTemplate": "/api/orders",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/orders/",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "UpstreamScheme": "https",
+      "SwaggerKey": "order",
+      "RouteIsCaseSensitive": false,
+      "FileCacheOptions": {
+        "TtlSeconds": 30, // 30 sn boyunca
+        "Region": "cache-products" // redis üzerinde hangi keyde saklanacağı bilgisi
+      }
+    },
+    {
+      "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim
+      "ServiceName": "OrderService", // service ismi ile art�k eri�im sa�layaca��m�z� s�yledik. (Port veya Host bilgisi yazmad�k)
+      "DownstreamPathTemplate": "/api/orders/{everything}",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/orders/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "UpstreamScheme": "https",
+      "SwaggerKey": "order"
+    }
+  ]
+}
+
+

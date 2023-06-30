@@ -19,7 +19,7 @@ namespace OrderService.Infrastructure.Context
 
         public OrderContext CreateDbContext(string[] args)
         {
-            var connStr = "Data Source=(localDB)\\MSSQLLocalDB;Initial Catalog=OrderDB;Trusted_Connection=True";
+            var connStr = "Data Source=(localDB)\\MyLocalDb;Initial Catalog=OrderDB;Trusted_Connection=True";
             //var connStr = "Data Source=c_sqlserver;Initial Catalog=OrderDB;Trusted_Connection=True";
 
           var optionsBuilder = new DbContextOptionsBuilder<OrderContext>()

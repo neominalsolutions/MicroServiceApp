@@ -5,10 +5,10 @@
       "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim
       "ServiceName": "IdentityService", // service ismi ile art�k eri�im sa�layaca��m�z� s�yledik. (Port veya Host bilgisi yazmad�k)
       "DownstreamPathTemplate": "/api/auth",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "UpstreamPathTemplate": "/identity",
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
-      "UpstreamScheme": "http",
+      "UpstreamScheme": "https",
       "SwaggerKey": "identity",
       "RateLimitOptions": {
         "ClientWhitelist": [],

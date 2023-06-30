@@ -76,7 +76,7 @@ app.UseSwaggerForOcelotUI(opt =>
     opt.PathToSwaggerGenerator = "/swagger/docs";
   }).UseOcelot().Wait();
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.MapControllers();
 

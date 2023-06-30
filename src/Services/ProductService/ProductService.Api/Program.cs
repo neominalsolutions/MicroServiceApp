@@ -96,10 +96,9 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
+
 app.UseConsol(app.Lifetime, builder.Configuration);
-
-//app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
