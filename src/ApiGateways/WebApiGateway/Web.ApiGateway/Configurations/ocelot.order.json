@@ -8,12 +8,12 @@
       "UpstreamPathTemplate": "/orders/",
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
       "UpstreamScheme": "https",
-      "SwaggerKey": "order",
+      "SwaggerKey": "c_identity",
       "RouteIsCaseSensitive": false,
-      "FileCacheOptions": {
-        "TtlSeconds": 30, // 30 sn boyunca
-        "Region": "cache-products" // redis üzerinde hangi keyde saklanacağı bilgisi
-      }
+      //"FileCacheOptions": {
+      //  "TtlSeconds": 30, // 30 sn boyunca
+      //  "Region": "cache-products" // redis üzerinde hangi keyde saklanacağı bilgisi
+      //}
     },
     {
       "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim

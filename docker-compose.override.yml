@@ -1,28 +1,36 @@
 version: '3.4'
 
 services:
-  identityservice.api:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:5001
-      - ConsulConfig__Address=http://consul:8500
-      - ConsulConfig__ServiceAddress=http://identityservice:5001
-      - ConsulConfig__ServiceName=IdentityService
-      - ConsulConfig__ServiceId=IdentityService
-    ports:
-      - "5001:5001"
-    networks:
-      - backendservice_network
 
-  webapigateway:
+  webapigateway.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:5011
+      - ASPNETCORE_URLS=http://+:5011
     ports:
       - "5011:5011"
     networks:
       - apigateway_network
       - backendservice_network
+
+  identity.api:
+    expose:
+      - "8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001
+      - ConsulConfig__Address=http://consul_service:8500
+      - ConsulConfig__ServiceAddress=http://c_identity:5001
+      - ConsulConfig__ServiceName=IdentityService
+      - ConsulConfig__ServiceId=IdentityService
+    ports:
+      - "5001:5001"
+    networks: 
+      - apigateway_network
+      - backendservice_network
+    depends_on: 
+      - webapigateway.api
+    external_links: 
+      - consul_service
 
   consul_service:
     ports:
@@ -43,6 +51,15 @@ services:
       - backendservice_network
       - apigateway_network
 
+  redis_service:
+    ports:
+      - 6379:6379
+    volumes:
+      - /opt/app_data/redis/:/data
+    networks:
+      - backendservice_network
+
+
 networks:
   apigateway_network:
     driver: bridge
@@ -50,6 +67,8 @@ networks:
   backendservice_network:
     driver: bridge
     external: true
+
+
 
 volumes:
   rabbitmq:

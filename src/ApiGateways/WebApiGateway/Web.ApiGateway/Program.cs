@@ -18,15 +18,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 
-//builder.Host.ConfigureAppConfiguration((host, config) =>
-//{
-//  config.SetBasePath(host.HostingEnvironment.ContentRootPath)
-//                        .AddJsonFile("Configurations/ocelot.json", optional: false, reloadOnChange: true)
-//                        .AddEnvironmentVariables();
-//});
-
-
-
 
 builder.Configuration.AddOcelotWithSwaggerSupport(options =>
 {
@@ -39,18 +30,26 @@ builder.Configuration.AddOcelotWithSwaggerSupport(options =>
 // ayný secret key ile çalýþýyorlar
 
 builder.Services.ConfigureAuth(builder.Configuration);
+//builder.Services
+//  .AddOcelot(builder.Configuration)
+//  .AddCacheManager(x =>
+//{
+//  x.WithRedisConfiguration("redis",
+//          config =>
+//          {
+//            config.WithAllowAdmin();
+//            config.WithDatabase(0);
+//            config.WithEndpoint("localhost", 6379);
+//          })
+//  .WithJsonSerializer()
+//  .WithRedisCacheHandle("redis");
+//}).AddConsul();
+
+
 builder.Services
   .AddOcelot(builder.Configuration)
-  .AddCacheManager(x =>
-{
-  x.WithRedisConfiguration("redis",
-          config =>
-          {
-            config.WithEndpoint("localhost", 6379);
-          })
-  .WithJsonSerializer()
-  .WithRedisCacheHandle("redis");
-}).AddConsul();
+  .AddConsul();
+
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
 // ocelotan sonra consul diye bir service ekliyoruz.
 
