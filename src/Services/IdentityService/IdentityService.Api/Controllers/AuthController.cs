@@ -31,5 +31,13 @@ namespace IdentityService.Api.Controllers
 
             return Ok(result);
         }
+
+    // api/auth/1 GET
+    [HttpGet("{userId}")]
+    public async Task<IActionResult> Login(string userId)
+    {
+   
+      return Ok();
     }
+  }
 }

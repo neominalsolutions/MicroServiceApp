@@ -31,17 +31,17 @@
       "ServiceName": "ProductService", // service ismi ile artık erişim sağlayacağımızı söyledik. (Port veya Host bilgisi yazmadık Service Discoveryden gelecek)
       "DownstreamPathTemplate": "/api/suppliers",
       "DownstreamScheme": "http",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": [ "user.read" ] // user.read scope varsa get endpointte sadece claim olarak user.read scope varsa yetkili olur.
-      },
-      "RouteClaimsRequirement": {
-        "Roles": "Admin" // hemde admin yetkisine sahip olmalıyım.
-      },
       "UpstreamPathTemplate": "/suppliers",
       "UpstreamHttpMethod": [ "Get" ],
       "UpstreamScheme": "http",
-      "SwaggerKey": "product"
+      "SwaggerKey": "product",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "supplier-read" ]
+      },
+      "RouteClaimsRequirement": {
+          "Roles": "Admin"
+      },
     },
     {
       "UseServiceDiscovery": true, // service discovery yöntemini kullanacağımızı belirttik
@@ -54,13 +54,29 @@
       "SwaggerKey": "product",
       "Key": "categories" // aggregate key
 
-    }
+    },
+    //{
+    //  "UseServiceDiscovery": true, // service discovery yöntemini kullanacağımızı belirttik
+    //  "ServiceName": "ProductService", // service ismi ile artık erişim sağlayacağımızı söyledik. (Port veya Host bilgisi yazmadık Service Discoveryden gelecek)
+    //  "DownstreamPathTemplate": "/api/categories/{productId}",
+    //  "DownstreamScheme": "http",
+    //  "UpstreamPathTemplate": "/categories",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "UpstreamScheme": "http",
+    //  "SwaggerKey": "product",
+    //  "Key": "categoriesByProductId" // aggregate key
+
+    //}
   ],
   "Aggregates": [
     {
       "RouteKeys": [ "products", "categories" ],
-      "UpstreamPathTemplate": "/categories-and-products"
-    }
+      "UpstreamPathTemplate": "/categories-and-products/"
+    },
+    //{
+    //  "RouteKeys": [ "products", "categoriesByProductId" ],
+    //  "UpstreamPathTemplate": "/categories-and-products/{productId}"
+    //}
   ]
 }
 

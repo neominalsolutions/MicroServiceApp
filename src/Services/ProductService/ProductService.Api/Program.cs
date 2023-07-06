@@ -51,6 +51,15 @@ builder.Services.AddJwtAuthentication(builder.Configuration);
 //builder.Services.AddAuthorization();
 
 
+builder.Services.AddAuthorization(opt =>
+{
+  opt.AddPolicy("read.user.policy", policy =>
+  {
+    policy.RequireAuthenticatedUser();
+    policy.RequireClaim("read.user","allowed denied");
+    policy.RequireRole("admin");
+  });
+});
 
 
 
