@@ -26,6 +26,8 @@ namespace IdentityServer.Api.Application.Services
 
       var key = Encoding.ASCII.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
 
+     
+
       // VERIFY SIGNATURE KEY Şifreleme Algoritması HS256, 
 
       var tokenHandler = new JwtSecurityTokenHandler(); // token oluşturucu sınıf
@@ -35,7 +37,7 @@ namespace IdentityServer.Api.Application.Services
          {
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Name, requestModel.UserName),
-                    new Claim("Roles",requestModel.Roles),
+                    new Claim(ClaimTypes.Role,requestModel.Roles),
                     new Claim("scope", string.Join(" ", requestModel.Scopes))
          });
 

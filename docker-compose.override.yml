@@ -41,6 +41,7 @@ services:
       - apigateway_network
       - backendservice_network
 
+
   rabbitmq_service:
     ports:
       - 5672:5672
