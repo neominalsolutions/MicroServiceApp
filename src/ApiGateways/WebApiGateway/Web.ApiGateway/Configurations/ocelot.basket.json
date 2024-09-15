@@ -8,7 +8,7 @@
       "UpstreamPathTemplate": "/baskets/",
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
       "UpstreamScheme": "http",
-      "SwaggerKey": "basket"
+      "SwaggerKey": "basketapi"
     },
     {
       "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim
@@ -18,7 +18,7 @@
       "UpstreamPathTemplate": "/baskets/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
       "UpstreamScheme": "http",
-      "SwaggerKey": "basket"
+      "SwaggerKey": "basketapi"
     }
   ]
 }

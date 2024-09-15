@@ -8,7 +8,7 @@
       "UpstreamPathTemplate": "/identity",
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
       "UpstreamScheme": "http",
-      "SwaggerKey": "identity"
+      "SwaggerKey": "identityapi"
     }
   ]
 }

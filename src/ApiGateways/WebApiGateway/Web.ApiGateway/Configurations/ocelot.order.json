@@ -8,7 +8,7 @@
       "UpstreamPathTemplate": "/orders/",
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
       "UpstreamScheme": "http",
-      "SwaggerKey": "order",
+      "SwaggerKey": "orderapi",
       "RouteIsCaseSensitive": false
     },
     {
@@ -19,7 +19,7 @@
       "UpstreamPathTemplate": "/orders/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
       "UpstreamScheme": "http",
-      "SwaggerKey": "order"
+      "SwaggerKey": "orderapi"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "SwaggerEndPoints": [
     {
-      "Key": "identity-api",
+      "Key": "identityapi",
       "Config": [
         {
           "Name": "Identity API",
@@ -14,7 +14,7 @@
       ]
     },
     {
-      "Key": "product-api",
+      "Key": "productapi",
       "Config": [
         {
           "Name": "Product Api",
@@ -27,7 +27,7 @@
       ]
     },
     {
-      "Key": "basketa-api",
+      "Key": "basketapi",
       "Config": [
         {
           "Name": "Basket Api",
@@ -40,7 +40,7 @@
       ]
     },
     {
-      "Key": "order-api",
+      "Key": "orderapi",
       "Config": [
         {
           "Name": "Order Api",

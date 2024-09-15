@@ -19,7 +19,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5001
       - ConsulConfig__Address=http://consul_service:8500
-      - ConsulConfig__ServiceAddress=http://c_identity:5001
+      - ConsulConfig__ServiceAddress=http://identity.api:5001
       - ConsulConfig__ServiceName=IdentityService
       - ConsulConfig__ServiceId=IdentityService
     ports:
@@ -31,6 +31,51 @@ services:
       - webapigateway.api
     external_links: 
       - consul_service
+
+
+  order.api:
+    expose:
+      - "8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5005
+      - ConsulConfig__Address=http://consul_service:8500
+      - ConsulConfig__ServiceAddress=http://order.api:5005
+      - ConsulConfig__ServiceName=OrderService
+      - ConsulConfig__ServiceId=OrderService
+    ports:
+      - "5005:5005"
+    networks: 
+      - apigateway_network
+      - backendservice_network
+      - sqlserver-network
+    depends_on: 
+      - webapigateway.api
+      - s_sqlserver
+      - rabbitmq_service
+      - redis_service
+      - consul_service
+    external_links: 
+      - s_sqlserver
+      - rabbitmq_service
+      - redis_service
+      - consul_service
+
+
+  s_sqlserver:
+      ports:
+        - 1433:1433
+      environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=Password1
+        - MSSQL_PID=Developer
+      hostname: sqlServer2022
+      networks:
+        - sqlserver-network
+        - backendservice_network
+      volumes:
+        - sqlserver-data:/var/opt/mssql
+
 
   consul_service:
     ports:
@@ -68,8 +113,12 @@ networks:
   backendservice_network:
     driver: bridge
     external: true
+  sqlserver-network:
+    driver: bridge
+    external: true
 
 
 
 volumes:
   rabbitmq:
+  sqlserver-data:

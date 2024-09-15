@@ -13,7 +13,19 @@ services:
     build:
       context: .
       dockerfile: src/ApiGateways/WebApiGateway/Web.ApiGateway/Dockerfile
+
+  order.api:
+    container_name: c_orderapi
+    image: ${DOCKER_REGISTRY-}orderapi
+    build:
+      context: .
+      dockerfile: src/Services/OrderService/OrderService.Api/Dockerfile
    
+
+  s_sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: c_sqlserver
+
   consul_service:
     container_name: consul
     image: hashicorp/consul:1.15
@@ -21,7 +33,7 @@ services:
   redis_service:
     container_name: redis
     image: redis
-
+    
   rabbitmq_service:
     container_name: rabbitmq
     image: rabbitmq:3-management

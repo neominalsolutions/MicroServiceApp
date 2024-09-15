@@ -19,7 +19,8 @@ namespace OrderService.Infrastructure.Context
 
         public OrderContext CreateDbContext(string[] args)
         {
-            var connStr = "Data Source=(localDB)\\MyLocalDb;Initial Catalog=OrderDB;Trusted_Connection=True";
+           // migration alırken kullanılacak.
+            var connStr = "Data Source=localhost;Initial Catalog=OrderDb;Persist Security Info=True;User ID=sa;Password=Password1;TrustServerCertificate=True;";
             //var connStr = "Data Source=c_sqlserver;Initial Catalog=OrderDB;Trusted_Connection=True";
 
           var optionsBuilder = new DbContextOptionsBuilder<OrderContext>()

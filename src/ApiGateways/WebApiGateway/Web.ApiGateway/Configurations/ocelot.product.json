@@ -8,7 +8,7 @@
       "UpstreamPathTemplate": "/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
       "UpstreamScheme": "http",
-      "SwaggerKey": "product-api"
+      "SwaggerKey": "productapi"
     },
     {
       "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim
@@ -16,9 +16,9 @@
       "DownstreamPathTemplate": "/api/products",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/products",
-      "UpstreamHttpMethod": [ "Get"],
+      "UpstreamHttpMethod": [ "Get" ],
       "UpstreamScheme": "http",
-      "SwaggerKey": "product-api",
+      "SwaggerKey": "productapi",
       "Key": "products"
     },
     {
@@ -29,7 +29,7 @@
       "UpstreamPathTemplate": "/categories",
       "UpstreamHttpMethod": [ "Get" ],
       "UpstreamScheme": "http",
-      "SwaggerKey": "product-api",
+      "SwaggerKey": "productapi",
       "Key": "categories"
     }
   ],

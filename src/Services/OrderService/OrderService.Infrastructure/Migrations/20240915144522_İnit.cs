@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OrderService.Infrastructure.Migrations
 {
-    public partial class OrderInit : Migration
+    public partial class İnit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

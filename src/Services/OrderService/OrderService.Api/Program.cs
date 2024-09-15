@@ -44,7 +44,8 @@ builder.Services.AddCap(options =>
     options.ConnectionFactoryOptions = options =>
     {
       options.Ssl.Enabled = false;
-      options.HostName = "localhost";
+      options.HostName = "localhost"; // local haberleþme
+      //options.HostName = "rabbitmq"; // dockerdan haberleþmek için, container name üzerinden haberleþelim.
       options.UserName = "guest";
       options.Password = "guest";
       options.Port = 5672;
@@ -63,7 +64,7 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseConsul(app.Lifetime, builder.Configuration);
 
