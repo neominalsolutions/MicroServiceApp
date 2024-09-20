@@ -20,6 +20,10 @@
       "UpstreamScheme": "http",
       "SwaggerKey": "productapi",
       "Key": "products"
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //}
     },
     {
       "UseServiceDiscovery": true, // service discovery y�ntemini kullanaca��m� belirttim

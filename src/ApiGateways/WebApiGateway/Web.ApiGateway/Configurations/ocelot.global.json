@@ -1,10 +1,10 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl": "http://webapigateway.api:5011", // docker üzerinden bağlantı
-    //"BaseUrl": "http://localhost:5011", // local üzerinden bağlantı
+    //"BaseUrl": "http://webapigateway.api:5011", // docker üzerinden bağlantı
+    "BaseUrl": "http://localhost:5011", // local üzerinden bağlantı
     "ServiceDiscoveryProvider": { // 8500 consul default http port 8600 tcp:udp port
-      "Host": "consul_service",
-      //"Host": "localhost",
+      // "Host": "consul_service",
+      "Host": "localhost",
       "Port": 8500,
       "Type": "Consul"
     },
